@@ -2,21 +2,34 @@
 
 import { useState } from "react";
 
-interface Props {
-  onSave: (payload: { title: string; text: string }) => void;
-}
-
-export default function TextAssetForm({ onSave }: Props) {
+export default function TextAssetForm() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [saving, setSaving] = useState(false);
+
+  async function save() {
+    setSaving(true);
+    const res = await fetch("http://localhost:8001/notes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "note", title, text }),
+    });
+
+    setSaving(false);
+    if (!res.ok) {
+      alert("Failed to save");
+      return;
+    }
+    const saved = await res.json();
+    console.log("Saved note:", saved);
+    setTitle("");
+    setText("");
+  }
 
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSave({ title, text });
-      }}
-      className="space-y-4 max-w-lg mx-auto"
+        onSubmit={e => { e.preventDefault(); save(); }}
+        className="space-y-4 max-w-lg mx-auto"
     >
       <div>
         <label className="block text-sm font-medium mb-1">Title</label>
@@ -42,9 +55,10 @@ export default function TextAssetForm({ onSave }: Props) {
 
       <button
         type="submit"
+        disabled={saving}
         className="rounded bg-blue-600 text-white text-sm font-medium px-4 py-2 hover:bg-blue-700 transition cursor-pointer"
       >
-        Save
+        {saving ? "Saving…" : "Save"}
       </button>
     </form>
   );

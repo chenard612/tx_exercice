@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import TextAssetForm from "@/components/forms/NoteAssetForm";
+import NoteAssetForm from "@/components/forms/NoteAssetForm";
 
 export default function BuilderPage() {
   const labels = ["Note", "Image", "Chart", "Table"];
@@ -39,7 +39,7 @@ export default function BuilderPage() {
           Builder workspace
         </h1>
         {chosen === "Note" && (
-          <TextAssetForm onSave={handleTextSave} />
+          <NoteAssetForm onSave={handleTextSave} />
         )}
 
         {chosen && chosen !== "Note" && (

@@ -3,3 +3,5 @@ venv*
 .env
 tx_venv/
 venv/
+
+*.db
