@@ -35,7 +35,7 @@ export default function TableAssetForm() {
 
     setSaving(true);
 
-    const res = await fetch("http://localhost:8000/tables", {
+    const res = await fetch("http://localhost:8001/tables", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

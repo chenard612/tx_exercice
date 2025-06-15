@@ -1,5 +1,6 @@
 from sqlmodel import SQLModel, Field
-from typing import Optional
+from typing import Optional, List
+from sqlalchemy import Column, JSON
 import uuid, datetime
 
 class Note(SQLModel, table=True):
@@ -20,5 +21,7 @@ class Table(SQLModel, table=True):
     id: str = Field(default_factory=lambda: uuid.uuid4().hex, primary_key=True)
     type: str = "table"
     title: str
-    rows: list[list[str]]
+    rows: List[List[str]] = Field(
+        sa_column=Column(JSON)
+    )
     created_at: datetime.datetime = Field(default_factory=datetime.datetime.utcnow)

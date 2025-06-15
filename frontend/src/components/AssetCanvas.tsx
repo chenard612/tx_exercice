@@ -31,7 +31,7 @@ export default function AssetCanvas({ assets }: Props) {
               <div key={a.id} className="bg-white p-4 rounded shadow">
                 <h3 className="font-semibold mb-2">{a.title}</h3>
                 <img
-                src={`http://localhost:8000${a.url}`}
+                src={`http://localhost:8001${a.url}`}
                 alt={a.title ?? "image"}
                 className="max-h-64 rounded object-contain mx-auto"
                 />
