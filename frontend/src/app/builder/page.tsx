@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import NoteAssetForm from "@/components/forms/NoteAssetForm";
+import ImageAssetForm from "@/components/forms/ImageAssetForm";
 
 export default function BuilderPage() {
   const labels = ["Note", "Image", "Chart", "Table"];
@@ -35,23 +36,15 @@ export default function BuilderPage() {
       </section>
 
       <section className="flex-1 p-8">
-        <h1 className="text-2xl font-bold text-gray-700">
+        <h1 className="text-2xl font-bold text-gray-700 mb-10">
           Builder workspace
         </h1>
-        {chosen === "Note" && (
-          <NoteAssetForm onSave={handleTextSave} />
-        )}
+        {chosen === "Note" && <NoteAssetForm onSave={handleTextSave} />}
 
-        {chosen && chosen !== "Note" && (
-          <p className="text-gray-500">
-            “{chosen}” form not implemented yet.
-          </p>
-        )}
+        {chosen === "Image" && <ImageAssetForm />}
 
-        {!chosen && (
-          <p className="text-gray-500 text-sm">
-            No type selected yet. Click on a cube above to start.
-          </p>
+        {chosen && chosen !== "Note" && chosen !== "Image" && (
+          <p className="text-gray-500">“{chosen}” form not implemented yet.</p>
         )}
       </section>
     </div>
