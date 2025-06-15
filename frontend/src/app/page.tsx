@@ -23,7 +23,7 @@ export default function Home() {
       </section>
 
       <aside className="col-span-1 bg-white rounded-xl p-6 shadow">
-        <h2 className="font-semibold mb-4">Available Assets</h2>
+        <h2 className="font-semibold mb-4 text-center">Available Assets</h2>
         <AssetList selected={selected} toggle={toggle} />
       </aside>
     </div>

@@ -43,19 +43,19 @@ export default function AssetList({ selected, toggle }: Props) {
         return <p className="text-sm text-gray-500">Loading assets…</p>;
     }
 
-    if (error) {
-        return (
-        <div className="text-sm text-red-600">
-            {error}
-            <button
-            onClick={() => location.reload()}
-            className="ml-2 underline"
-            >
-            retry
-            </button>
-        </div>
-        );
-    }
+    // if (error) {
+    //     return (
+    //     <div className="text-sm text-red-600">
+    //         {error}
+    //         <button
+    //         onClick={() => location.reload()}
+    //         className="ml-2 underline"
+    //         >
+    //         retry
+    //         </button>
+    //     </div>
+    //     );
+    // }
 
     return (
         <>
@@ -83,10 +83,10 @@ export default function AssetList({ selected, toggle }: Props) {
         )}
 
         <button
-            onClick={() => router.push("/asset-create")}
-            className="mt-6 w-full rounded bg-blue-600 py-2 text-white text-sm font-medium hover:bg-blue-700 transition"
+            onClick={() => router.push("/builder")}
+            className="mt-6 w-full rounded bg-blue-600 py-2 text-white text-sm font-medium hover:bg-blue-700 transition cursor-pointer"
         >
-            + New Asset
+            Create New Asset
         </button>
         </>
     );
