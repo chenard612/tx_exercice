@@ -37,6 +37,25 @@ export default function AssetCanvas({ assets }: Props) {
                 />
               </div>
             );
+          case "table":
+            return (
+              <div key={a.id} className="bg-white p-4 rounded shadow">
+                <h3 className="font-semibold mb-2">{a.title}</h3>
+                <table className="w-full text-sm border-collapse">
+                  <tbody>
+                    {(a.rows as string[][]).map((row, rIdx) => (
+                      <tr key={rIdx} className="odd:bg-gray-50">
+                        {row.map((cell, cIdx) => (
+                          <td key={cIdx} className="border px-2 py-1">
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
           default:
             return (
               <p key={a.id} className="text-sm text-gray-500">

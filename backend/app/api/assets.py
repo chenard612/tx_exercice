@@ -10,7 +10,7 @@ from app.database.models import Note, Image, Table
 
 router = APIRouter()
 
-@router.get("/", response_model=List[Note | Image])
+@router.get("/", response_model=List[Note | Image | Table])
 def list_assets(session: Session = Depends(get_session)):
     notes:  List[Note]  = session.exec(select(Note)).all()
     images: List[Image] = session.exec(select(Image)).all()
@@ -56,6 +56,7 @@ async def create_image(
 
 @router.post("/tables", response_model=Table, status_code=201)
 def create_table(payload: Table, session: Session = Depends(get_session)):
+    print("📥 received payload:", payload.dict())
     session.add(payload)
     session.commit()
     session.refresh(payload)

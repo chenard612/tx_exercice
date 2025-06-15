@@ -1,6 +1,6 @@
 # TX Exercice
 
-A **FastAPI** application that downloads CSV files describing natural gas shipments, parses and validates them, and inserts the data into a PostgreSQL database.
+- A **FastAPI** application that downloads CSV files describing natural gas shipments, parses and validates them, and inserts the data into a PostgreSQL database.
 - A **React (Next.js)** frontend for building custom reports with drag-and-drop layout tools.
 
 ---
@@ -25,8 +25,7 @@ A **FastAPI** application that downloads CSV files describing natural gas shipme
 ## Requirements
 
 - Python 3.10+
-- Docker & Docker Compose
-- Node.js 18+ and **pnpm** (`corepack enable` to activate)
+- Node.js 18+ and pnpm (`corepack enable` to activate)
 
 ---
 
@@ -42,9 +41,6 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Configure the Database. 
-
-
 ## Run the server with this command:
 This starts the FastAPI server on port 8000.
 
@@ -52,9 +48,9 @@ This starts the FastAPI server on port 8000.
 uvicorn app.main:app --reload
 ```
 
-## Run the Query
-Run this curl inside the command line to trigger the query of the CSV, its parsing and its insertion in the database.
+## Run the frotnend with this command:
+This starts the NextJS server on port 3000.
 
 ```bash
-curl -X POST http://localhost:8000/
+pnpm dev
 ```

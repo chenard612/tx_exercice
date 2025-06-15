@@ -5,3 +5,5 @@ tx_venv/
 venv/
 
 *.db
+uploaded_images/
+*.pyc

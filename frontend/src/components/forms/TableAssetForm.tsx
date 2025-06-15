@@ -34,15 +34,16 @@ export default function TableAssetForm() {
       return alert("Add at least one row before saving.");
 
     setSaving(true);
-
+    const payload = {
+      type: "table",
+      title,
+      rows: formatted,
+    };
+    console.log("🚀 payload to POST /tables:", payload); 
     const res = await fetch("http://localhost:8001/tables", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: "table",
-        title,
-        rows: formatted,
-      }),
+      body: JSON.stringify(payload)
     });
 
     setSaving(false);

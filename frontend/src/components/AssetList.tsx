@@ -3,13 +3,29 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export interface Asset {
+export interface TableAsset {
+  id: string;
+  type: "table";
+  title: string;
+  rows: string[][];
+}
+
+export interface NoteAsset {
+  id: string;
+  type: string;
+  title: string;
+  text?: string;
+}
+
+export interface ImageAsset {
   id: string;
   type: string;
   title: string;
   text?: string;
   url?: string;
 }
+
+export type Asset = NoteAsset | ImageAsset | TableAsset;
 
 interface Props {
   assets: Asset[];
