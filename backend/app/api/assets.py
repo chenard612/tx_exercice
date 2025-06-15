@@ -4,20 +4,19 @@ from pydantic import BaseModel
 from app.database.database import get_session
 from typing import List
 import uuid, os
+from settings import UPLOAD_DIR
 
-from app.database.models import Note, Image
+from app.database.models import Note, Image, Table
 
 router = APIRouter()
-
-UPLOAD_DIR = "uploaded_images"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 @router.get("/", response_model=List[Note | Image])
 def list_assets(session: Session = Depends(get_session)):
     notes:  List[Note]  = session.exec(select(Note)).all()
     images: List[Image] = session.exec(select(Image)).all()
+    tables: List[Table] = session.exec(select(Table)).all()
 
-    combined = sorted((*notes, *images), key=lambda a: a.id)
+    combined = sorted((*notes, *images, *tables), key=lambda a: a.id)
 
     return combined
 
@@ -44,13 +43,20 @@ async def create_image(
 ):
     ext = os.path.splitext(file.filename)[1]
     filename = f"{uuid.uuid4().hex}{ext}"
-    filepath = os.path.join(UPLOAD_DIR, filename)
+    filepath = UPLOAD_DIR / filename 
 
     with open(filepath, "wb") as out:
         out.write(await file.read())
 
-    img = Image(title=title, url=f"/{UPLOAD_DIR}/{filename}")
+    img = Image(title=title, url=f"/uploaded_images/{filename}")
     session.add(img)
     session.commit()
     session.refresh(img)
     return img
+
+@router.post("/tables", response_model=Table, status_code=201)
+def create_table(payload: Table, session: Session = Depends(get_session)):
+    session.add(payload)
+    session.commit()
+    session.refresh(payload)
+    return payload

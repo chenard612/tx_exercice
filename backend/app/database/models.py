@@ -1,14 +1,24 @@
 from sqlmodel import SQLModel, Field
 from typing import Optional
+import uuid, datetime
 
 class Note(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    type: str
+    id: str = Field(default_factory=lambda: uuid.uuid4().hex, primary_key=True)
+    type: str = "note"
     title: Optional[str] = None
     text: Optional[str] = None
+    created_at: datetime.datetime = Field(default_factory=datetime.datetime.utcnow)
 
 class Image(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: str = Field(default_factory=lambda: uuid.uuid4().hex, primary_key=True)
     type: str = "image"
     title: Optional[str] = None
-    url: str     
+    url: str
+    created_at: datetime.datetime = Field(default_factory=datetime.datetime.utcnow)
+
+class Table(SQLModel, table=True):
+    id: str = Field(default_factory=lambda: uuid.uuid4().hex, primary_key=True)
+    type: str = "table"
+    title: str
+    rows: list[list[str]]
+    created_at: datetime.datetime = Field(default_factory=datetime.datetime.utcnow)

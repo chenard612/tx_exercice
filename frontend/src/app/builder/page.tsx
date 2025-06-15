@@ -3,6 +3,7 @@
 import { useState } from "react";
 import NoteAssetForm from "@/components/forms/NoteAssetForm";
 import ImageAssetForm from "@/components/forms/ImageAssetForm";
+import TableAssetForm from "@/components/forms/TableAssetForm";
 
 export default function BuilderPage() {
   const labels = ["Note", "Image", "Chart", "Table"];
@@ -43,7 +44,9 @@ export default function BuilderPage() {
 
         {chosen === "Image" && <ImageAssetForm />}
 
-        {chosen && chosen !== "Note" && chosen !== "Image" && (
+        {chosen === "Table" && <TableAssetForm />}
+
+        {chosen && chosen !== "Note" && chosen !== "Image" && chosen !== "Table" && (
           <p className="text-gray-500">“{chosen}” form not implemented yet.</p>
         )}
       </section>

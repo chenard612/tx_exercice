@@ -3,13 +3,16 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export type Asset =
-  | { id: string; type: "text"; content: string }
-  | { id: string; type: "image"; url: string; alt?: string }
-  | { id: string; type: "chart"; title: string }
-  | { id: string; type: "table"; title: string };
+export interface Asset {
+  id: string;
+  type: string;
+  title: string;
+  text?: string;
+  url?: string;
+}
 
 interface Props {
+  assets: Asset[];
   selected: Set<string>;
   toggle: (id: string) => void;
 }
@@ -25,7 +28,7 @@ export default function AssetList({ selected, toggle }: Props) {
     useEffect(() => {
     async function fetchAssets() {
         try {
-            const res = await fetch("http://localhost:8000/assets");
+            const res = await fetch("http://localhost:8001/");
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data: Asset[] = await res.json();
             setAssets(data);
@@ -43,19 +46,19 @@ export default function AssetList({ selected, toggle }: Props) {
         return <p className="text-sm text-gray-500">Loading assets…</p>;
     }
 
-    // if (error) {
-    //     return (
-    //     <div className="text-sm text-red-600">
-    //         {error}
-    //         <button
-    //         onClick={() => location.reload()}
-    //         className="ml-2 underline"
-    //         >
-    //         retry
-    //         </button>
-    //     </div>
-    //     );
-    // }
+    if (error) {
+        return (
+        <div className="text-sm text-red-600">
+            {error}
+            <button
+            onClick={() => location.reload()}
+            className="ml-2 underline"
+            >
+            retry
+            </button>
+        </div>
+        );
+    }
 
     return (
         <>
@@ -67,15 +70,12 @@ export default function AssetList({ selected, toggle }: Props) {
                 <li key={asset.id} className="flex items-center gap-2">
                 <input
                     type="checkbox"
-                    checked={selected.has(asset.id)}
-                    onChange={() => toggle(asset.id)}
+                    checked={selected.has(String(asset.id))}
+                    onChange={() => toggle(String(asset.id))}
                     className="h-4 w-4 accent-blue-600"
                 />
                 <span className="text-sm">
-                    {asset.type.toUpperCase()} –{" "}
-                    {"content" in asset
-                    ? asset.content
-                    : asset.title ?? asset.id}
+                    {asset.type.toUpperCase()} – {asset.title}
                 </span>
                 </li>
             ))}
