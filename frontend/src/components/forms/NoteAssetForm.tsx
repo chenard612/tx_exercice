@@ -9,7 +9,7 @@ export default function TextAssetForm() {
 
   async function save() {
     setSaving(true);
-    const res = await fetch("http://localhost:8001/notes", {
+    const res = await fetch("http://localhost:8000/notes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type: "note", title, text }),

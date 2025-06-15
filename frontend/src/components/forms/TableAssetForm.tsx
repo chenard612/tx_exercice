@@ -40,7 +40,7 @@ export default function TableAssetForm() {
       rows: formatted,
     };
     console.log("🚀 payload to POST /tables:", payload); 
-    const res = await fetch("http://localhost:8001/tables", {
+    const res = await fetch("http://localhost:8000/tables", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)

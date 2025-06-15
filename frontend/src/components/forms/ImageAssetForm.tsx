@@ -26,7 +26,7 @@ export default function ImageAssetForm() {
     form.append("title", title);
     form.append("file", file);
 
-    const res = await fetch("http://localhost:8001/images", {
+    const res = await fetch("http://localhost:8000/images", {
       method: "POST",
       body: form,
     });

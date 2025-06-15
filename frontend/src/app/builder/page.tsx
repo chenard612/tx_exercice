@@ -4,16 +4,26 @@ import { useState } from "react";
 import NoteAssetForm from "@/components/forms/NoteAssetForm";
 import ImageAssetForm from "@/components/forms/ImageAssetForm";
 import TableAssetForm from "@/components/forms/TableAssetForm";
+import { useRouter } from "next/navigation";
 
 export default function BuilderPage() {
   const labels = ["Note", "Image", "Chart", "Table"];
   const [chosen, setChosen] = useState<string | null>(null);
+
+  const router = useRouter();
 
   const handleTextSave = (data: { title: string; text: string }) => {
     console.log("Text asset saved:", data);
   };
 
   return (
+    <>
+      <button
+          onClick={() => router.push("/")}
+          className="mt-3 ml-6 rounded bg-blue-600 py-2 px-4 text-white text-sm font-medium hover:bg-blue-700 transition cursor-pointer"
+      >
+          Home
+      </button>
     <div className="min-h-screen flex flex-col bg-slate-50">
       <p className="ml-3 mt-3 text-sm text-gray-600">
         Choose the asset you want to create
@@ -51,5 +61,6 @@ export default function BuilderPage() {
         )}
       </section>
     </div>
+    </>
   );
 }

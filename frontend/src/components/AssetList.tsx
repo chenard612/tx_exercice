@@ -44,7 +44,7 @@ export default function AssetList({ selected, toggle }: Props) {
     useEffect(() => {
     async function fetchAssets() {
         try {
-            const res = await fetch("http://localhost:8001/");
+            const res = await fetch("http://localhost:8000/");
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data: Asset[] = await res.json();
             setAssets(data);
