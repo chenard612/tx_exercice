@@ -1,17 +1,24 @@
 # TX Exercice
 
-A FastAPI application that downloads CSV files describing natural gas shipments, parses and validates them, and inserts the data into a PostgreSQL database.
+A **FastAPI** application that downloads CSV files describing natural gas shipments, parses and validates them, and inserts the data into a PostgreSQL database.
+- A **React (Next.js)** frontend for building custom reports with drag-and-drop layout tools.
 
 ---
 
 ## Technologies Used
 
-- **FastAPI** (async Python web framework)
-- **Uvicorn** (ASGI server)
-- **SQLAlchemy** (ORM)
-- **PostgreSQL** (relational database)
-- **Docker Compose** (for running PostgreSQL locally)
-- **BeautifulSoup** & **Requests** (for HTML parsing and HTTP requests)
+- **FastAPI**               (async Python web framework)
+- **Uvicorn**               (ASGI server)
+- **SQLAlchemy**            (ORM)
+- **Next.js 14**            (React framework with App Router and SSR)
+- **TypeScript**            (static typing)
+- **Tailwind CSS**          (utility-first styling)
+- **react-grid-layout**     (drag-and-drop layout builder)
+- **MUI (Material UI)**     (ready-to-use components)
+- **Recharts**              (charting library for visualizations)
+- **faker.js**              (generate sample data)
+- **SWR**                   (data fetching and caching)
+- **Axios**                 (HTTP client)
 
 ---
 
@@ -19,6 +26,7 @@ A FastAPI application that downloads CSV files describing natural gas shipments,
 
 - Python 3.10+
 - Docker & Docker Compose
+- Node.js 18+ and **pnpm** (`corepack enable` to activate)
 
 ---
 
